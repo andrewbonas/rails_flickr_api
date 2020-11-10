@@ -1,0 +1,24 @@
+<% flash.each do |type, msg| %>
+  <div class="warning">
+    <%= msg %>
+  </div>
+<% end %>
+
+<%= form_with(url: "/index", method: "get", local: true) do |f| %>
+  <div class="input-group mt-3 col-3">
+    <%= f.text_field :user_id, placeholder: "Flickr user ID", class: "form-control" %>
+    <div class="input-group-append">
+      <%= f.submit 'Search', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<% if @photos %>
+  <div class="card-columns mt-5">
+    <% @photos.each do |p| %>
+      <div class="card">
+        <img class="card-img-top" src=<%=Flickr.url(p)%>>
+      </div>
+    <% end %>
+  </div>
+<% end %>
